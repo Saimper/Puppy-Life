@@ -1,0 +1,49 @@
+
+  <style>
+    /* Estilos CSS para la animación */
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  </style>
+
+<body>
+  <section class="flex items-center justify-center w-full mx-auto h-screen bg-cover bg-center relative" style="background-image: url('/Bg-Dog-min.jpg');">
+    <div class="absolute inset-0 bg-black opacity-80"></div>
+    <!-- Agregamos un contenedor span para el texto animado -->
+    <h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10 justify-center z-10">
+      <span id="animated-text" class="typing-animation"></span>
+    </h1>
+    <h2 class="text-2xl text-wrap"></h2>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const phrases = ["Puppy life", "Cambiamos vidas"];
+      const text = document.getElementById('animated-text');
+      let currentPhraseIndex = 0;
+      
+      function typePhrase(phrase) {
+        text.textContent = '';
+        let i = 0;
+        const typingInterval = setInterval(function() {
+          text.textContent += phrase[i++];
+          if (i === phrase.length) {
+            clearInterval(typingInterval);
+            setTimeout(() => {
+              if (currentPhraseIndex < phrases.length - 1) {
+                typePhrase(phrases[++currentPhraseIndex]);
+              }
+            }, 1000); // Intervalo de espera después de terminar una frase antes de mostrar la siguiente
+          }
+        }, 100); // Intervalo de tiempo entre cada letra
+      }
+
+      typePhrase(phrases[currentPhraseIndex]);
+    });
+  </script>
